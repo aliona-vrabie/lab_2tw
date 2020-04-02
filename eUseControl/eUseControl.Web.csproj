@@ -374,10 +374,17 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BussinesLogic.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ISession.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MyBusinessLogic.cs" />
+    <Compile Include="Controllers\ProduseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -387,6 +394,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Home\Logare.cshtml" />
     <Content Include="Views\Home\Inregistrare.cshtml" />
+    <Content Include="Views\Login\LogIn.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -396,13 +405,22 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eUseControl.BusinnessLogic\eUseControl.BusinessLogic.csproj">
+      <Project>{cfc47351-1251-463e-ba8c-570ae573cef6}</Project>
+      <Name>eUseControl.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
+      <Project>{978456dd-0762-441f-9e99-8bbcc58da092}</Project>
+      <Name>eUseControl.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
