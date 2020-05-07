@@ -1,4 +1,6 @@
-﻿<div class="py-1 bg-primary">
+﻿@model eUseControl.Web.Models.UserData
+
+	<div class="py-1 bg-primary">
 	<div class="container">
 		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
 			<div class="col-lg-12 d-block">
@@ -18,36 +20,92 @@
 			</div>
 		</div>
 	</div>
-</div>
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	<div class="container">
-		<a class="navbar-brand" href="@Url.Action("Index","Home") ">ApiAlbina </a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="oi oi-menu"></span> Menu
-		</button>
-
-		<div class="collapse navbar-collapse" id="ftco-nav">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a href="index.html" class="nav-link">Despre noi</a></li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produsele noastre</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown04">
-						<a class="dropdown-item" href="shop.html">Miere</a>
-						<a class="dropdown-item" href="wishlist.html">Produse din propolis</a>
-						<a class="dropdown-item" href="product-single.html">Lapte de regina</a>
-						<a class="dropdown-item" href="cart.html">Polen crud</a>
-						<a class="dropdown-item" href="checkout.html">Produse din ceara</a>
-					</div>
-				</li>
-				<li class="nav-item"><a class="nav-link">Noutati</a></li>
-				<li class="nav-item"><a class="nav-link">Blog</a></li>
-				<li class="nav-item"><a class="nav-link">Blog</a></li>
-				<li class="nav-item"><a class="nav-link">Contacte</a></li>
-				<li class="nav-item cta cta-colored"><a class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-				<li class="nav-item"><a class="nav-link" href="@Url.Action("Logare","Home")">Logare</a></li>
-				<li class="nav-item"><a class="nav-link" href="@Url.Action("Inregistrare","Home")">Inregistrare</a></li>
-			</ul>
-		</div>
 	</div>
-</nav>
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="@Url.Action("Index","Home") ">ApiAlbina </a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a href="index.html" class="nav-link">Despre noi</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produsele noastre</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="shop.html">Miere</a>
+							<a class="dropdown-item" href="wishlist.html">Produse din propolis</a>
+							<a class="dropdown-item" href="product-single.html">Lapte de regina</a>
+							<a class="dropdown-item" href="cart.html">Polen crud</a>
+							<a class="dropdown-item" href="checkout.html">Produse din ceara</a>
+						</div>
+					</li>
+					<li class="nav-item"><a class="nav-link">Noutati</a></li>
+					<li class="nav-item"><a class="nav-link">Blog</a></li>
+					<li class="nav-item"><a class="nav-link">Blog</a></li>
+					<li class="nav-item"><a class="nav-link">Contacte</a></li>
+					<li class="nav-item cta cta-colored"><a class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+					@if (Model == null)
+					{
+						<li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Login")">Logare</a></li>
+						<li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Register")">Inregistrare</a></li>
+					}
+					else
+					{
+						<li class="dropdown notification-list">
+							<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+								<span class="pro-user-name ml-1">
+									@Html.DisplayFor(u => u.Username)<i class="mdi mdi-chevron-down"></i>
+								</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+
+								<!-- item-->
+								<a href="javascript:void(0);" class="dropdown-item notify-item">
+									<i class="remixicon-account-circle-line"></i>
+									<span>My Account</span>
+								</a>
+
+								<!-- item-->
+								<a href="javascript:void(0);" class="dropdown-item notify-item">
+									<i class="remixicon-settings-3-line"></i>
+									<span>Settings</span>
+								</a>
+
+								<div class="dropdown-divider"></div>
+
+								<!-- item-->
+								<a class="dropdown-item notify-item" href="javascript:;" onclick="document.forms[0].submit();">
+									@using (Html.BeginForm("Logout", "Login", FormMethod.Post))
+									{
+										<i class="remixicon-logout-box-line"></i>
+										<span>Logout</span>
+									}
+								</a>
+							</div>
+						</li>
+					}
+				</ul>
+
+				<!-- Topbar Start -->
+
+				<div class="logo-box">
+					<ul class="list-unstyled topnav-menu float-left mb-0">
+						<a href="@Url.Action("Index", "Home")" class="logo">
+							<span class="logo-lg">
+								<img src="~/Content/images/TW (3).gif" alt="" height="76">
+								<!-- <span class="logo-lg-text-light">Xeria</span> -->
+							</span>
+
+						</a>
+					</ul>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!-- end Topbar -->
+	</nav>
+
 

@@ -1,60 +1,72 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using eUseControl.BusinnessLogic.Interfaces;
-using eUseControl.Domain.Entities.User;
-using eUseControl.Models;
+using AutoMapper;
+using eUseControl.BusinessLogic.Interfaces;
 using eUseControl.BusinnessLogic;
+using eUseControl.Domain.Entities.User;
+using eUseControl.Web.Models;
 
-namespace Top_Infinity.Controllers
+namespace eUseControl.Web.Controllers
 {
     public class LoginController : Controller
     {
         private readonly ISession _session;
         public LoginController()
         {
-            var bl = new MyBusinessLogic();
+            var bl = new BussinesLogic();
             _session = bl.GetSessionBL();
         }
+
         // GET: Login
         public ActionResult Index()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(UserLogin login)
+        public ActionResult Index(UserLoginData login)
         {
             if (ModelState.IsValid)
             {
-                ULoginData data = new ULoginData
-                {
-                    Email = login.Email,
-                    Password = login.Password,
-                    LoginIp = Request.UserHostAddress,
-                    LoginDateTime = DateTime.Now
-                };
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<UserLoginData, ULoginData>());
+                var mapper = new Mapper(config);
+                var data = mapper.Map<ULoginData>(login);
+
+                data.LoginDateTime = DateTime.Now;
+                data.LoginIp = Request.UserHostAddress;
 
                 var userLogin = _session.UserLogin(data);
                 if (userLogin.Status)
                 {
-                    //ADD COOKIE
+                    HttpCookie cookie = _session.GenCookie(login.Credential);
+                    ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+
                     return RedirectToAction("Index", "Home");
                 }
-                else
+
+                ModelState.AddModelError("", userLogin.StatusMsg);
+                return View();
+            }
+            return View(login);
+        }
+
+        public ActionResult Logout()
+        {
+            System.Web.HttpContext.Current.Session.Abandon();
+            if (ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("X-KEY"))
+            {
+                var cookie = ControllerContext.HttpContext.Request.Cookies["X-KEY"];
+                if (cookie != null)
                 {
-                    ModelState.AddModelError("", userLogin.StatusMsg);
-                    return View();
+                    cookie.Expires = DateTime.Now.AddDays(-1);
+                    ControllerContext.HttpContext.Response.Cookies.Add(cookie);
                 }
             }
-            return View();
-        }
-        public ActionResult LogIn()
-        {
-
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
+

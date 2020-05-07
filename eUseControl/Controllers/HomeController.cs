@@ -1,25 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using eUseControl.Web.Extension;
+using eUseControl.Web.Models;
 
-namespace eUseControl.Controllers
+namespace eUseControl.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        // GET: Home
+        [HandleError]
         public ActionResult Index()
         {
-            return View();
+            SessionStatus();
+            var user = System.Web.HttpContext.Current.GetMySessionObject();
+            if (user == null)
+            {
+                return View();
+            }
+
+            UserData u = new UserData
+            {
+                Username = user.Username
+            };
+            return View(u);
         }
-        public ActionResult Logare()
+
+        public ActionResult TermsConditions()
         {
-            return View();
+            SessionStatus();
+            var user = System.Web.HttpContext.Current.GetMySessionObject();
+            if (user == null)
+            {
+                return View();
+            }
+
+            UserData u = new UserData
+            {
+                Username = user.Username
+            };
+            return View(u);
         }
-        public ActionResult Inregistrare()
+
+        public ActionResult Booking()
         {
-            return View();
+            SessionStatus();
+            var user = System.Web.HttpContext.Current.GetMySessionObject();
+            if (user == null)
+            {
+                return View();
+            }
+
+            UserData u = new UserData
+            {
+                Username = user.Username
+            };
+            return View(u);
         }
+
     }
 }

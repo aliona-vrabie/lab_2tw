@@ -46,9 +46,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Entities\Produse\ProductsData.cs" />
+    <Compile Include="Entities\Produse\ProductsResp.cs" />
+    <Compile Include="Entities\User\Session.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
     <Compile Include="Entities\User\ULoginResp.cs" />
-    <Compile Include="Entities\User\URole.cs" />
+    <Compile Include="Entities\User\URegisterResp.cs" />
+    <Compile Include="Enums\URole.cs" />
+    <Compile Include="Entities\User\UserMinimal.cs" />
     <Compile Include="Entities\User\UsersDbTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,9 +63,7 @@
       <Name>eUseControl.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

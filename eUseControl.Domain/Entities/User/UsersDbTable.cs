@@ -8,34 +8,40 @@ using System.Threading.Tasks;
 
 namespace eUseControl.Domain.Entities.User
 {
-	public class UsersDbTable
-	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
+    public class UsersDbTable
+    {
+        public string Credential;
 
-		[Required]
-		[Display(Name = "Username")]
-		[StringLength(30, MinimumLength = 5, ErrorMessage = " Username cannot be longer than 30 characters.")]
-		public string Username { get; set; }
-		[Required]
-		[Display(Name = "Password")]
-		[StringLength(50, MinimumLength = 8, ErrorMessage = " Password cannot be longer than 8 characters.")]
-		public string Password { get; set; }
-		[Required]
-		[Display(Name = "Email Address")]
-		[StringLength(30)]
-		public string Email { get; set; }
-		[DataType(DataType.Date)]
-		public DateTime LastLogin { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
-		[StringLength(30)]
-		public string LasIp { get; set; }
+        [Required]
+        [Display(Name = "Username")]
+        [StringLength(30, MinimumLength = 5, ErrorMessage = "Username cannot be longer than 30 characters.")]
+        public string Username { get; set; }
 
-		public URole Level { get; set; }
-		[StringLength(100)]
-		public string AvatarUrl { get; set; }
-		[DataType(DataType.Date)]
-		public DateTime RegisterDate { get; set; }
+        [Required]
+        [Display(Name = "Password")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Password cannot be shorter than 6 characters.")]
+        public string Password { get; set; }
+
+        [Required]
+        [Display(Name = "Password")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Password need to be the same as first entry.")]
+        public string RepeatPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Email Address")]
+        [StringLength(30)]
+        public string Email { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime LastLogin { get; set; }
+
+        [StringLength(30)]
+        public URole Level { get; set; }
+        public string LasIp { get; set; }
+		public string LastIp { get; set; }
 	}
 }

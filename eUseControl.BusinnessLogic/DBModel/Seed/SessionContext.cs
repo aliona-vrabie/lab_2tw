@@ -8,13 +8,12 @@ using eUseControl.Domain.Entities.User;
 
 namespace eUseControl.BusinessLogic.DBModel.Seed
 {
-	public class UserContext : DbContext
-	{
-		public UserContext() :
-			base("name=eUseControl")
-		{
-		}
-		public virtual DbSet<UsersDbTable> Users { get; set; }
+    internal class SessionContext : DbContext
+    {
+        public SessionContext() : base("name=eUseControlDB")
+        {
+        }
 
-	}
+        public virtual DbSet<Session> Sessions { get; set; }
+    }
 }

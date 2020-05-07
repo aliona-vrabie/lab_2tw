@@ -18,6 +18,16 @@ namespace eUseControl
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+               name: "Signin",
+               url: "{controller}/{action}",
+               defaults: new { controller = "Login", action = "Signin" }
+           );
+            routes.MapRoute(
+                name: "Register",
+                url: "{controller}/{action}",
+                defaults: new { controller = "Register", action = "Register" }
+            );
         }
     }
 }

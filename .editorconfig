@@ -2,3 +2,18 @@
 
 # IDE0055: Fix formatting
 dotnet_diagnostic.IDE0055.severity = error
+
+# IDE0060: Remove unused parameter
+dotnet_code_quality_unused_parameters = non_public:suggestion
+
+# CS0253: Possible unintended reference comparison; right hand side needs cast
+dotnet_diagnostic.CS0253.severity = none
+
+# IDE0008: Use explicit type
+csharp_style_var_elsewhere = true:silent
+
+# IDE0001: Simplify Names
+dotnet_diagnostic.IDE0001.severity = none
+
+# IDE0040: Add accessibility modifiers
+dotnet_style_require_accessibility_modifiers = never:silent
